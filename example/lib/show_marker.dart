@@ -9,9 +9,13 @@ class ShowMarker extends StatefulWidget {
 }
 
 class _ShowMarkerState extends State<ShowMarker> {
-  double latitude = 37.759392;
-  double longitude = -122.5107336;
-  String title = 'Ocean Beach';
+  double latitude = 0;
+  double longitude = 0;
+  // String title = 'Mforce Parts Sdn Bhd 1485, Jalan Seruling, Kawasan Perinudstrian Valdor, 14200 Sungai Jawi, Pulau Pinang 14200 Sungai Jawi';
+ 
+  String title = '[99 Speedmart] Pg Tmn Bkt Panchor, No : 140 & 142 (Ground Floor), Lorong Bukit Panchor 1, Taman Bukit Panchor, 14300 Nibong Tebal';
+  // String title = '19,lorong Bakap Indah 2, Taman Bakap Indah 14200 Sungai Jawi';
+
   int zoom = 18;
 
   @override

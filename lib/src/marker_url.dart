@@ -6,6 +6,7 @@ import 'package:map_launcher/src/utils.dart';
 String getMapMarkerUrl({
   required MapType mapType,
   required Coords coords,
+  String? address,
   String? title,
   String? description,
   int? zoom,
@@ -17,8 +18,9 @@ String getMapMarkerUrl({
       return Utils.buildUrl(
         url: Platform.isIOS ? 'comgooglemaps://' : 'geo:0,0',
         queryParams: {
-          'q':
-              '${coords.latitude},${coords.longitude}${title != null && title.isNotEmpty ? '($title)' : ''}',
+          'q': address != null
+              ? address
+              : '${coords.latitude},${coords.longitude}${title != null && title.isNotEmpty ? '($title)' : ''}',
           'zoom': '$zoomLevel',
           ...(extraParams ?? {}),
         },
@@ -68,20 +70,24 @@ String getMapMarkerUrl({
     case MapType.apple:
       return Utils.buildUrl(
         url: 'http://maps.apple.com/maps',
-        queryParams: {
-          'saddr': '${coords.latitude},${coords.longitude}',
-          ...(extraParams ?? {}),
-        },
+        queryParams: address != null
+            ? {'q': address}
+            : {
+                'saddr': '${coords.latitude},${coords.longitude}',
+                ...(extraParams ?? {}),
+              },
       );
 
     case MapType.waze:
       return Utils.buildUrl(
         url: 'waze://',
-        queryParams: {
-          'll': '${coords.latitude},${coords.longitude}',
-          'z': '$zoomLevel',
-          ...(extraParams ?? {}),
-        },
+        queryParams: address != null
+            ? {'q': address, 'z': '$zoomLevel'}
+            : {
+                'll': '${coords.latitude},${coords.longitude}',
+                'z': '$zoomLevel',
+                ...(extraParams ?? {}),
+              },
       );
 
     case MapType.yandexNavi:
